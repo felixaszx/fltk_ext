@@ -1,0 +1,336 @@
+#ifndef INCLUDE_FLTK_HXX
+#define INCLUDE_FLTK_HXX
+
+#include "fltk_headers.hxx"
+#include "fl_flow.hxx"
+#include "fl_ext.hxx"
+
+#if !defined(FL_NAMESPACE)
+    #define FL_NAMESPACE old_fltk
+#endif
+
+#if !defined(FLE_NAMESPACE)
+    #define FLE_NAMESPACE fl
+#endif
+
+namespace FL_NAMESPACE
+{
+    using sys = Fl;
+    using adjuster = Fl_Adjuster;
+    using anim_gif_image = Fl_Anim_GIF_Image;
+    using bitmap = Fl_Bitmap;
+    using bmp_image = Fl_BMP_Image;
+    using box = Fl_Box;
+    using browser = Fl_Browser;
+    using browser_ = Fl_Browser_;
+    using button = Fl_Button;
+#ifdef FLTK_HAVE_CAIRO
+    using cairo_state = Fl_Cairo_State;
+    using cairo_window = Fl_Cairo_Window;
+#endif
+    using callback_user_data = Fl_Callback_User_Data;
+    using chart = Fl_Chart;
+    using chart_entry = FL_CHART_ENTRY;
+    using check_browser = Fl_Check_Browser;
+    using check_button = Fl_Check_Button;
+    using choice = Fl_Choice;
+    using clock = Fl_Clock;
+    using clock_output = Fl_Clock_Output;
+    using color_chooser = Fl_Color_Chooser;
+    using copy_surface = Fl_Copy_Surface;
+    using counter = Fl_Counter;
+    using device_plugin = Fl_Device_Plugin;
+    using dial = Fl_Dial;
+    using display_device = Fl_Display_Device;
+    using double_window = Fl_Double_Window;
+    using end = Fl_End;
+    using eps_file_surface = Fl_EPS_File_Surface;
+    using file_browser = Fl_File_Browser;
+    using file_chooser = Fl_File_Chooser;
+    using file_icon = Fl_File_Icon;
+    using file_input = Fl_File_Input;
+    using fill_dial = Fl_Fill_Dial;
+    using fill_slider = Fl_Fill_Slider;
+    using flex = Fl_Flex;
+    using float_input = Fl_Float_Input;
+    using formsbitmap = Fl_FormsBitmap;
+    using formspixmap = Fl_FormsPixmap;
+    using formstext = Fl_FormsText;
+    using free = Fl_Free;
+    using gif_image = Fl_GIF_Image;
+    using gl_choice = Fl_Gl_Choice;
+    using gl_window = Fl_Gl_Window;
+    using grid = Fl_Grid;
+    using group = Fl_Group;
+    using help_block = Fl_Help_Block;
+    using help_dialog = Fl_Help_Dialog;
+    using help_font_stack = Fl_Help_Font_Stack;
+    using help_font_style = Fl_Help_Font_Style;
+    using help_link = Fl_Help_Link;
+    using help_target = Fl_Help_Target;
+    using help_view = Fl_Help_View;
+    using hold_browser = Fl_Hold_Browser;
+    using hor_fill_slider = Fl_Hor_Fill_Slider;
+    using hor_nice_slider = Fl_Hor_Nice_Slider;
+    using hor_slider = Fl_Hor_Slider;
+    using hor_value_slider = Fl_Hor_Value_Slider;
+    using ico_image = Fl_ICO_Image;
+    using image = Fl_Image;
+    using image_reader = Fl_Image_Reader;
+    using image_surface = Fl_Image_Surface;
+    using input = Fl_Input;
+    using input_ = Fl_Input_;
+    using input_choice = Fl_Input_Choice;
+    using int_input = Fl_Int_Input;
+    using jpeg_image = Fl_JPEG_Image;
+    using label = Fl_Label;
+    using light_button = Fl_Light_Button;
+    using line_dial = Fl_Line_Dial;
+#ifdef __APPLE__
+    using mac_app_menu = Fl_Mac_App_Menu;
+#endif
+    using menu_ = Fl_Menu_;
+    using menu_bar = Fl_Menu_Bar;
+    using menu_button = Fl_Menu_Button;
+    using menu_item = Fl_Menu_Item;
+    using menu_window = Fl_Menu_Window;
+    using multi_browser = Fl_Multi_Browser;
+    using multi_label = Fl_Multi_Label;
+    using multiline_input = Fl_Multiline_Input;
+    using multiline_output = Fl_Multiline_Output;
+    using native_file_chooser = Fl_Native_File_Chooser;
+    using nice_slider = Fl_Nice_Slider;
+    using output = Fl_Output;
+    using overlay_window = Fl_Overlay_Window;
+    using pack = Fl_Pack;
+    using paged_device = Fl_Paged_Device;
+    using pdf_file_surface = Fl_PDF_File_Surface;
+    using pixmap = Fl_Pixmap;
+    using plugin = Fl_Plugin;
+    using plugin_manager = Fl_Plugin_Manager;
+    using png_image = Fl_PNG_Image;
+    using pnm_image = Fl_PNM_Image;
+    using positioner = Fl_Positioner;
+    using postscript_file_device = Fl_PostScript_File_Device;
+    using preferences = Fl_Preferences;
+    using printer = Fl_Printer;
+    using progress = Fl_Progress;
+    using radio_button = Fl_Radio_Button;
+    using radio_light_button = Fl_Radio_Light_Button;
+    using radio_round_button = Fl_Radio_Round_Button;
+    using rect = Fl_Rect;
+    using repeat_button = Fl_Repeat_Button;
+    using return_button = Fl_Return_Button;
+    using rgb_image = Fl_RGB_Image;
+    using roller = Fl_Roller;
+    using round_button = Fl_Round_Button;
+    using round_clock = Fl_Round_Clock;
+    using scheme = Fl_Scheme;
+    using scheme_choice = Fl_Scheme_Choice;
+    using scroll = Fl_Scroll;
+    using scrollbar = Fl_Scrollbar;
+    using secret_input = Fl_Secret_Input;
+    using select_browser = Fl_Select_Browser;
+    using shared_image = Fl_Shared_Image;
+    using shortcut_button = Fl_Shortcut_Button;
+    using simple_counter = Fl_Simple_Counter;
+    using single_window = Fl_Single_Window;
+    using slider = Fl_Slider;
+    using spinner = Fl_Spinner;
+    using surface_device = Fl_Surface_Device;
+    using svg_file_surface = Fl_SVG_File_Surface;
+    using svg_image = Fl_SVG_Image;
+    using sys_menu_bar = Fl_Sys_Menu_Bar;
+    using table = Fl_Table;
+    using table_row = Fl_Table_Row;
+    using tabs = Fl_Tabs;
+    using terminal = Fl_Terminal;
+    using text_buffer = Fl_Text_Buffer;
+    using text_display = Fl_Text_Display;
+    using text_editor = Fl_Text_Editor;
+    using text_selection = Fl_Text_Selection;
+    using tile = Fl_Tile;
+    using tiled_image = Fl_Tiled_Image;
+    using timer = Fl_Timer;
+    using toggle_button = Fl_Toggle_Button;
+    using tooltip = Fl_Tooltip;
+    using tree = Fl_Tree;
+    using tree_item = Fl_Tree_Item;
+    using tree_item_array = Fl_Tree_Item_Array;
+    using tree_prefs = Fl_Tree_Prefs;
+    using valuator = Fl_Valuator;
+    using value_input = Fl_Value_Input;
+    using value_output = Fl_Value_Output;
+    using value_slider = Fl_Value_Slider;
+    using widget = Fl_Widget;
+    using widget_surface = Fl_Widget_Surface;
+    using widget_tracker = Fl_Widget_Tracker;
+    using window = Fl_Window;
+    using wizard = Fl_Wizard;
+    using xbm_image = Fl_XBM_Image;
+    using xpm_image = Fl_XPM_Image;
+
+    using flow = fl_flow::Flow;
+} // namespace FL_NAMESPACE
+
+namespace FLE_NAMESPACE
+{
+    using sys = Fl;
+    using adjuster = fl::ext<Fl_Adjuster>;
+    using anim_gif_image = Fl_Anim_GIF_Image;
+    using bitmap = Fl_Bitmap;
+    using bmp_image = Fl_BMP_Image;
+    using box = fl::ext<Fl_Box>;
+    using browser = fl::ext<Fl_Browser>;
+    using browser_ = fl::ext<Fl_Browser_>;
+    using button = fl::ext<Fl_Button>;
+#ifdef FLTK_HAVE_CAIRO
+    using cairo_state = Fl_Cairo_State;
+    using cairo_window = fl::ext<Fl_Cairo_Window>;
+#endif
+    using callback_user_data = Fl_Callback_User_Data;
+    using chart = fl::ext<Fl_Chart>;
+    using chart_entry = FL_CHART_ENTRY;
+    using check_browser = fl::ext<Fl_Check_Browser>;
+    using check_button = fl::ext<Fl_Check_Button>;
+    using choice = fl::ext<Fl_Choice>;
+    using clock = fl::ext<Fl_Clock>;
+    using clock_output = fl::ext<Fl_Clock_Output>;
+    using color_chooser = fl::ext<Fl_Color_Chooser>;
+    using copy_surface = Fl_Copy_Surface;
+    using counter = fl::ext<Fl_Counter>;
+    using device_plugin = Fl_Device_Plugin;
+    using dial = fl::ext<Fl_Dial>;
+    using display_device = Fl_Display_Device;
+    using double_window = fl::ext<Fl_Double_Window>;
+    using end = Fl_End;
+    using eps_file_surface = Fl_EPS_File_Surface;
+    using file_browser = Fl_File_Browser;
+    using file_chooser = Fl_File_Chooser;
+    using file_icon = Fl_File_Icon;
+    using file_input = fl::ext<Fl_File_Input>;
+    using fill_dial = fl::ext<Fl_Fill_Dial>;
+    using fill_slider = fl::ext<Fl_Fill_Slider>;
+    using flex = fl::ext<Fl_Flex>;
+    using float_input = fl::ext<Fl_Float_Input>;
+    using formsbitmap = fl::ext<Fl_FormsBitmap>;
+    using formspixmap = fl::ext<Fl_FormsPixmap>;
+    using formstext = fl::ext<Fl_FormsText>;
+    using free = fl::ext<Fl_Free>;
+    using gif_image = Fl_GIF_Image;
+    using gl_choice = Fl_Gl_Choice;
+    using gl_window = fl::ext<Fl_Gl_Window>;
+    using grid = fl::ext<Fl_Grid>;
+    using group = fl::ext<Fl_Group>;
+    using help_block = Fl_Help_Block;
+    using help_dialog = Fl_Help_Dialog;
+    using help_font_stack = Fl_Help_Font_Stack;
+    using help_font_style = Fl_Help_Font_Style;
+    using help_link = Fl_Help_Link;
+    using help_target = Fl_Help_Target;
+    using help_view = fl::ext<Fl_Help_View>;
+    using hold_browser = fl::ext<Fl_Hold_Browser>;
+    using hor_fill_slider = fl::ext<Fl_Hor_Fill_Slider>;
+    using hor_nice_slider = fl::ext<Fl_Hor_Nice_Slider>;
+    using hor_slider = fl::ext<Fl_Hor_Slider>;
+    using hor_value_slider = fl::ext<Fl_Hor_Value_Slider>;
+    using ico_image = Fl_ICO_Image;
+    using image = Fl_Image;
+    using image_reader = Fl_Image_Reader;
+    using image_surface = Fl_Image_Surface;
+    using input = fl::ext<Fl_Input>;
+    using input_ = fl::ext<Fl_Input_>;
+    using input_choice = fl::ext<Fl_Input_Choice>;
+    using int_input = fl::ext<Fl_Int_Input>;
+    using jpeg_image = Fl_JPEG_Image;
+    using label = Fl_Label;
+    using light_button = fl::ext<Fl_Light_Button>;
+    using line_dial = fl::ext<Fl_Line_Dial>;
+#ifdef __APPLE__
+    using mac_app_menu = fl::ext<Fl_Mac_App_Menu>;
+#endif
+    using menu_ = fl::ext<Fl_Menu_>;
+    using menu_bar = fl::ext<Fl_Menu_Bar>;
+    using menu_button = fl::ext<Fl_Menu_Button>;
+    using menu_item = Fl_Menu_Item;
+    using menu_window = fl::ext<Fl_Menu_Window>;
+    using multi_browser = fl::ext<Fl_Multi_Browser>;
+    using multi_label = Fl_Multi_Label;
+    using multiline_input = fl::ext<Fl_Multiline_Input>;
+    using multiline_output = fl::ext<Fl_Multiline_Output>;
+    using native_file_chooser = Fl_Native_File_Chooser;
+    using nice_slider = fl::ext<Fl_Nice_Slider>;
+    using output = fl::ext<Fl_Output>;
+    using overlay_window = fl::ext<Fl_Overlay_Window>;
+    using pack = fl::ext<Fl_Pack>;
+    using paged_device = Fl_Paged_Device;
+    using pdf_file_surface = Fl_PDF_File_Surface;
+    using pixmap = Fl_Pixmap;
+    using plugin = Fl_Plugin;
+    using plugin_manager = Fl_Plugin_Manager;
+    using png_image = Fl_PNG_Image;
+    using pnm_image = Fl_PNM_Image;
+    using positioner = fl::ext<Fl_Positioner>;
+    using postscript_file_device = Fl_PostScript_File_Device;
+    using preferences = Fl_Preferences;
+    using printer = Fl_Printer;
+    using progress = fl::ext<Fl_Progress>;
+    using radio_button = fl::ext<Fl_Radio_Button>;
+    using radio_light_button = fl::ext<Fl_Radio_Light_Button>;
+    using radio_round_button = fl::ext<Fl_Radio_Round_Button>;
+    using rect = Fl_Rect;
+    using repeat_button = fl::ext<Fl_Repeat_Button>;
+    using return_button = fl::ext<Fl_Return_Button>;
+    using rgb_image = Fl_RGB_Image;
+    using roller = fl::ext<Fl_Roller>;
+    using round_button = fl::ext<Fl_Round_Button>;
+    using round_clock = fl::ext<Fl_Round_Clock>;
+    using scheme = Fl_Scheme;
+    using scheme_choice = fl::ext<Fl_Scheme_Choice>;
+    using scroll = fl::ext<Fl_Scroll>;
+    using scrollbar = fl::ext<Fl_Scrollbar>;
+    using secret_input = fl::ext<Fl_Secret_Input>;
+    using select_browser = fl::ext<Fl_Select_Browser>;
+    using shared_image = Fl_Shared_Image;
+    using shortcut_button = fl::ext<Fl_Shortcut_Button>;
+    using simple_counter = fl::ext<Fl_Simple_Counter>;
+    using single_window = fl::ext<Fl_Single_Window>;
+    using slider = fl::ext<Fl_Slider>;
+    using spinner = fl::ext<Fl_Spinner>;
+    using surface_device = Fl_Surface_Device;
+    using svg_file_surface = Fl_SVG_File_Surface;
+    using svg_image = Fl_SVG_Image;
+    using sys_menu_bar = fl::ext<Fl_Sys_Menu_Bar>;
+    using table = fl::ext<Fl_Table>;
+    using table_row = fl::ext<Fl_Table_Row>;
+    using tabs = fl::ext<Fl_Tabs>;
+    using terminal = fl::ext<Fl_Terminal>;
+    using text_buffer = Fl_Text_Buffer;
+    using text_display = fl::ext<Fl_Text_Display>;
+    using text_editor = fl::ext<Fl_Text_Editor>;
+    using text_selection = Fl_Text_Selection;
+    using tile = fl::ext<Fl_Tile>;
+    using tiled_image = Fl_Tiled_Image;
+    using timer = fl::ext<Fl_Timer>;
+    using toggle_button = fl::ext<Fl_Toggle_Button>;
+    using tooltip = Fl_Tooltip;
+    using tree = fl::ext<Fl_Tree>;
+    using tree_item = Fl_Tree_Item;
+    using tree_item_array = Fl_Tree_Item_Array;
+    using tree_prefs = Fl_Tree_Prefs;
+    using valuator = fl::ext<Fl_Valuator>;
+    using value_input = fl::ext<Fl_Value_Input>;
+    using value_output = fl::ext<Fl_Value_Output>;
+    using value_slider = fl::ext<Fl_Value_Slider>;
+    using widget = fl::ext<Fl_Widget>;
+    using widget_surface = Fl_Widget_Surface;
+    using widget_tracker = Fl_Widget_Tracker;
+    using window = fl::ext<Fl_Window>;
+    using wizard = fl::ext<Fl_Wizard>;
+    using xbm_image = Fl_XBM_Image;
+    using xpm_image = Fl_XPM_Image;
+
+    using flow = fl::ext<FL_NAMESPACE::flow>;
+}; // namespace FLE_NAMESPACE
+
+#endif // INCLUDE_FLTK_HXX
