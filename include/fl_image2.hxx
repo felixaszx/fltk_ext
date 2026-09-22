@@ -13,12 +13,15 @@ namespace fl::ext_widget
       protected:
         bool grey_scale_ = false;
         pixbuf* pixbuf_ = nullptr;
+        pixbuf cache_;
 
       public:
         inline constexpr image2(int x, int y, int w, int h, pixbuf* buf, const char* l = "")
             : Fl_Widget(x, y, w, h, l),
-              pixbuf_(buf)
+              pixbuf_(buf),
+              cache_(w, h, buf->d())
         {
+            scale(1);
         }
 
         inline constexpr image2(int x, int y, int w, int h, pixbuf& buf, const char* l = "")
@@ -29,13 +32,7 @@ namespace fl::ext_widget
         inline constexpr void //
         draw() override
         {
-            if (pixbuf_ == nullptr)
-            {
-                fl_draw_box(box(), x(), y(), w(), h(), color());
-                return;
-            }
-
-            if (w() < pixbuf_->w() || h() < pixbuf_->h())
+            if (w() < cache_.w() || h() < cache_.h())
             {
                 fl_draw_box(box(), x(), y(), w(), h(), color());
                 fl_rect(x(), y(), w(), h(), labelcolor());
@@ -73,30 +70,30 @@ namespace fl::ext_widget
             {
                 case FL_ALIGN_CENTER:
                 {
-                    real_x = x() + (w() - pixbuf_->w()) / 2;
-                    real_y = y() + (h() - pixbuf_->h()) / 2;
+                    real_x = x() + (w() - cache_.w()) / 2;
+                    real_y = y() + (h() - cache_.h()) / 2;
                     break;
                 }
                 case FL_ALIGN_TOP:
                 {
-                    real_x = x() + (w() - pixbuf_->w()) / 2;
+                    real_x = x() + (w() - cache_.w()) / 2;
                     break;
                 }
                 case FL_ALIGN_BOTTOM:
                 {
-                    real_x = x() + (w() - pixbuf_->w()) / 2;
-                    real_y = y() + h() - pixbuf_->h();
+                    real_x = x() + (w() - cache_.w()) / 2;
+                    real_y = y() + h() - cache_.h();
                     break;
                 }
                 case FL_ALIGN_LEFT:
                 {
-                    real_y = y() + (h() - pixbuf_->h()) / 2;
+                    real_y = y() + (h() - cache_.h()) / 2;
                     break;
                 }
                 case FL_ALIGN_RIGHT:
                 {
-                    real_x = x() + w() - pixbuf_->w();
-                    real_y = y() + (h() - pixbuf_->h()) / 2;
+                    real_x = x() + w() - cache_.w();
+                    real_y = y() + (h() - cache_.h()) / 2;
                     break;
                 }
                 case FL_ALIGN_TOP_LEFT:
@@ -105,18 +102,18 @@ namespace fl::ext_widget
                 }
                 case FL_ALIGN_TOP_RIGHT:
                 {
-                    real_x = x() + w() - pixbuf_->w();
+                    real_x = x() + w() - cache_.w();
                     break;
                 }
                 case FL_ALIGN_BOTTOM_LEFT:
                 {
-                    real_y = y() + h() - pixbuf_->h();
+                    real_y = y() + h() - cache_.h();
                     break;
                 }
                 case FL_ALIGN_BOTTOM_RIGHT:
                 {
-                    real_x = x() + w() - pixbuf_->w();
-                    real_y = y() + h() - pixbuf_->h();
+                    real_x = x() + w() - cache_.w();
+                    real_y = y() + h() - cache_.h();
                     break;
                 }
             }
@@ -125,41 +122,42 @@ namespace fl::ext_widget
 
             if (grey_scale_)
             {
-                fl_draw_image(fill_mono, pixbuf_, real_x, real_y, //
-                              pixbuf_->w(), pixbuf_->h(), 1);
+                fl_draw_image(fill_mono, &cache_, real_x, real_y, //
+                              cache_.w(), cache_.h(), 1);
             }
             else
             {
-                fl_draw_image(fill_colour, pixbuf_, real_x, real_y, //
-                              pixbuf_->w(), pixbuf_->h(), pixbuf_->d());
+                fl_draw_image(fill_colour, &cache_, real_x, real_y, //
+                              cache_.w(), cache_.h(), cache_.d());
             }
         }
 
         inline constexpr void //
         scale(int w, int h)
         {
-            if (w != pixbuf_->w() || h != pixbuf_->h())
+            if (w == cache_.w() && h == cache_.h())
             {
-                pixbuf new_buf(w, h, pixbuf_->d());
-                stbir_pixel_layout layout = STBIR_RGBA;
-
-                if (new_buf.d() == 3)
-                {
-                    layout = STBIR_RGB;
-                }
-
-                auto r = stbir_resize_uint8_srgb(pixbuf_->data(), pixbuf_->w(), pixbuf_->h(), 0, //
-                                                 new_buf.data(), w, h, 0,                        //
-                                                 layout);
-
-                if (r == nullptr)
-                {
-                    return;
-                }
-
-                *pixbuf_ = std::move(new_buf);
+                return;
             }
 
+            pixbuf new_buf(w, h, pixbuf_->d());
+            stbir_pixel_layout layout = STBIR_RGBA;
+
+            if (new_buf.d() == 3)
+            {
+                layout = STBIR_RGB;
+            }
+
+            auto r = stbir_resize_uint8_srgb(pixbuf_->data(), pixbuf_->w(), pixbuf_->h(), 0, //
+                                             new_buf.data(), w, h, 0,                        //
+                                             layout);
+
+            if (r == nullptr)
+            {
+                return;
+            }
+
+            cache_ = std::move(new_buf);
             damage(true);
         }
 

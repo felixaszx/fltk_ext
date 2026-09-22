@@ -5,7 +5,6 @@
 
 #include "fltk.hxx"
 #include "fl_theme.hxx"
-#include "std_extention.hxx"
 
 void PrintProcessNameAndID(DWORD processID)
 {
@@ -27,7 +26,6 @@ void PrintProcessNameAndID(DWORD processID)
         {
             std::filesystem::path path = szProcessName;
             std::string path_str = path.filename().generic_string();
-            logln("PID: {} {}", processID, path_str);
         }
     }
 

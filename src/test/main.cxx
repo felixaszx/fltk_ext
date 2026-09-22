@@ -1,5 +1,5 @@
-#include "std_extention.hxx"
 #include <print>
+#include <thread>
 
 #include "fltk.hxx"
 #include "fl_theme.hxx"
@@ -11,8 +11,10 @@
 
 int main(int argc, char** argv)
 {
+    using namespace std::chrono_literals;
+
     fl::theme::init();
-    fl::double_window window(800, 600);
+    fl::double_window window(800, 600, "Test");
     fl::flow user_space(0, 0, window.w(), window.h());
     fl::button sw(0, 0, 50, 50);
     user_space.rule(sw, "=<^");
@@ -22,7 +24,6 @@ int main(int argc, char** argv)
     fl::pixbuf buf(eula_info.x_, eula_info.y_, eula_info.comp_);
     std::memcpy(buf.data(), eula_pixbuf, eula_info.size_bytes());
     fl::image2 aaa(0, 0, 1, 1, buf);
-    aaa.scale(1920, 1080);
     aaa.grey_scale(true);
 
     window.add(user_space);
@@ -35,6 +36,7 @@ int main(int argc, char** argv)
     while (fl::sys::check())
     {
         std::this_thread::sleep_for(8ms);
+        aaa.scale(aaa.w(), aaa.h());
     }
 
     return 0;
